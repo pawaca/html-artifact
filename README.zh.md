@@ -112,7 +112,7 @@ bash tests/test-publish.sh
 
 ## 许可与来源
 
-项目采用 [MIT License](LICENSE)。发布流程使用 here.now 的公开匿名 API；保留原 Netlify 集成的 MIT 来源声明。HTML 示例理念与来源边界见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+项目采用 [MIT License](LICENSE)。外部参考与许可范围见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
 使用这个 skill 不会自动获得所输入文章、图片、用户对话或其他第三方材料的再发布权，也不会自动把生成页面中的所有内容变成 MIT。复制第三方代码或模板时，需要保留相应许可和署名。
 

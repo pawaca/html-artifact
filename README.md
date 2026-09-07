@@ -112,7 +112,7 @@ English is the default documentation language. The README is also available in [
 
 ## License and references
 
-This project uses the [MIT License](LICENSE). The publishing flow uses here.now's documented anonymous API; the former Netlify integration's MIT notice is retained for provenance. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the HTML example references and provenance boundaries.
+This project uses the [MIT License](LICENSE). See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for external references and the scope of the license.
 
 Using this skill does not grant republication rights to supplied articles, images, conversations, or other third-party material. It does not automatically make all generated page content MIT-licensed. Preserve the applicable licenses and attribution when copying third-party code or templates.
 
