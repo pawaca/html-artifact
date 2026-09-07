@@ -1,105 +1,111 @@
 # HTML Artifact for Codex
 
-**让 Codex 也能生成、展示并分享 artifact，而不止交付一段 Markdown 或一个本地路径。**
+English | [中文](README.zh.md)
 
-这个 Agent Skill 的目标，是给 Codex 补上类似 Claude / Claude Code 中可用 artifact 工作流的体验：把报告、解释、方案对比和案例复盘做成完整的 HTML 页面，再直接交付可打开的临时链接。
+**Give Codex an artifact workflow: create a visual document, open it, and share it.**
 
-它是社区实现，不是 Codex 或 Claude Code 的内置功能，也不复制它们的原生界面。Claude Code 环境中如果已有满足需求的内置 artifact 能力，优先使用内置能力；本 skill 主要服务 Codex 等其他环境。
+This Agent Skill brings an artifact-style experience to Codex, similar to the artifact workflows available in Claude / Claude Code environments. It turns reports, explanations, comparisons, and case reviews into complete HTML pages and delivers a temporary link you can open immediately.
 
-> Build a readable artifact, not just a Markdown answer. A lightweight skill for Codex that creates self-contained HTML reports and delivers temporary shareable links with curl. No frontend build chain, Python, Node, hosting account, or Netlify CLI required.
+It is a community implementation, not a built-in Codex or Claude Code feature, and does not reproduce their native interfaces. In Claude Code, prefer an available built-in artifact capability when it meets the request. This skill primarily serves Codex and other environments.
 
-## 能做什么
+No frontend build chain, Python, Node, hosting account, or Netlify CLI is required.
 
-- **单文件 HTML**：CSS、必要的 JavaScript 和 SVG 内联，离线也能打开。
-- **面向阅读的设计**：响应式布局、清楚的层级、打印样式；无需 React 或构建工具。
-- **具体问题复盘**：原对话与点评并排呈现，区分事实、推断、修复建议和验收标准。
-- **默认临时分享**：完成后匿名上传到 Netlify Drop，返回链接、访问密码和保留期限。
-- **可恢复发布**：上传或查询失败后，继续同一个部署，避免反复创建项目。
+## What you get
 
-适合报告、技术解释、研究摘要、方案比较和 review 文档。简单回答继续用聊天；正式网站和完整应用使用相应开发工作流。
+- **Self-contained HTML** — inline CSS, optional JavaScript, and SVG; the saved file also works offline.
+- **Readable documents** — responsive layouts, clear hierarchy, and print styles without React or a build step.
+- **Concrete case reviews** — dialogue excerpts beside annotations, separating facts, inferences, proposed fixes, and acceptance criteria.
+- **Temporary sharing by default** — anonymous Netlify Drop publishing with a URL, viewing password, and retention notice.
+- **Recoverable publishing** — continue the same deployment after an upload or status-check failure instead of creating another project.
 
-## 安装到 Codex
+Use it for reports, technical explanations, research summaries, comparisons, and review documents. Keep simple answers in chat; use a dedicated development workflow for production websites and full applications.
 
-确认目标目录不存在，再执行：
+## Install in Codex
+
+Check that the destination does not already exist, then run:
 
 ```bash
 git clone https://github.com/pawaca/html-artifact.git ~/.codex/skills/html-artifact
 ```
 
-如果设置了自定义 `CODEX_HOME`，安装到它的 `skills/html-artifact` 子目录。已有同名安装时先检查本地修改，不要直接覆盖。安装后开启新的 Codex 会话。
+If you use a custom `CODEX_HOME`, install into its `skills/html-artifact` subdirectory. Inspect local changes before updating an existing installation rather than overwriting it. Start a new Codex session after installation.
 
-也可以让 Codex 安装：
+You can also ask Codex:
 
 ```text
-用 skill-installer 安装 https://github.com/pawaca/html-artifact
+Use skill-installer to install https://github.com/pawaca/html-artifact
 ```
 
-## 使用
+## Use it
 
 ```text
-用 html-artifact 把这个方案做成能给非技术同事 review 的可视化文档。
-```
-
-```text
-把这几个问题逐案复盘：摘录具体对话，旁边点评错在哪、怎么修、如何验收。
+Use html-artifact to turn this proposal into a visual document that nontechnical colleagues can review.
 ```
 
 ```text
-做成单文件 HTML，只保存在本地，不上传。
+Review these issues case by case. Quote the relevant dialogue, annotate what went wrong, and explain the fix and acceptance criteria.
 ```
 
-**默认行为包含上传。** 使用本 skill 的默认工作流，会把完成的 HTML 上传到第三方匿名托管服务；不需要再单独说“发布”。明确要求“仅本地”“不上传”，或已有保密/分享限制时，跳过上传。若 Claude Code 的内置 artifact 工作流已满足需求，则使用内置交付，不额外上传。
+```text
+Create a single-file HTML document. Save it locally only; do not upload it.
+```
 
-## 发布脚本
+**The default workflow includes uploading.** This skill publishes the completed HTML to a third-party anonymous hosting service without requiring a separate publishing request. An explicit local-only instruction, a no-upload request, or an existing confidentiality or sharing constraint overrides that default. When a built-in Claude Code artifact workflow meets the request, use its delivery mechanism without an additional upload.
 
-运行依赖：Bash 3.2+、curl 7.55+、jq，以及 `sha1sum` / `shasum` / `openssl` 中任意一个。macOS、Linux 或具备这些工具的 shell 环境可用；原生 PowerShell 不是此脚本的目标环境。
+## Publishing script
+
+Requires Bash 3.2+, curl 7.55+, jq, and one of `sha1sum`, `shasum`, or `openssl`. Use macOS, Linux, or a shell environment with these tools. Native PowerShell is not a target runtime.
 
 ```bash
-# 检查输入，不发送网络请求
+# Validate the input without making network requests
 bash scripts/publish.sh /absolute/path/to/index.html --dry-run
 
-# 上传一个 HTML 文件
+# Upload one HTML file
 bash scripts/publish.sh /absolute/path/to/index.html
 
-# 从失败记录恢复；不创建新部署
+# Resume from a failure receipt without creating a new deployment
 bash scripts/publish.sh --resume /absolute/path/to/receipt.json
 ```
 
-成功时 stdout 输出 JSON，进度和错误写入 stderr。JSON 包含 `url`、`password`、`retention` 和验证状态。
+On success, stdout contains JSON; progress and errors go to stderr. The JSON includes `url`, `password`, `retention`, and verification status.
 
-- 未认领的部署由 Netlify 保留约 **1 小时**，不能自定义有效期；具体行为由服务方决定。
-- 访问密码 `My-Drop-Site` 是服务共享默认密码，**不应视为私密访问控制**。不要用它分享不允许公开的内容。
-- 只上传指定文件，最大 10 MiB；不会上传相对路径图片、附件、原始数据包或整个目录。
-- HTML 快照和含 token 的恢复记录保存在 `~/.codex/artifacts/.netlify-drop/`，只供本地恢复。可用 `HTML_ARTIFACT_STATE_DIR` 指定保存目录。不要公开记录或把它提交到 Git。
-- 不需要认领项目或登录。接口失败时保留本地 HTML，不自动改用 Sites、其他托管平台或账户部署。
-- 匿名接口根据 Netlify CLI 的实现对接，可能变化；发布成功不代表经过浏览器视觉检查。
+- Netlify retains unclaimed deployments for about **one hour**. There is no custom expiration setting; retention is controlled by the provider.
+- The viewing password, `My-Drop-Site`, is a shared service default and **must not be treated as private access control**. Do not use it to share material that cannot be public.
+- Only the specified file is uploaded, up to 10 MiB. Relative images, attachments, raw datasets, and entire directories are not uploaded.
+- HTML snapshots and recovery receipts containing tokens stay in `~/.codex/artifacts/.netlify-drop/`. Set `HTML_ARTIFACT_STATE_DIR` to choose another location. Do not publish these receipts or commit them to Git.
+- No project claim or login is required. If the API fails, keep the local HTML; do not automatically switch to Sites, another provider, or an authenticated deployment.
+- The anonymous endpoints follow Netlify CLI's implementation and may change. Deployment readiness does not imply browser visual verification.
 
-## 仓库内容
+## Repository layout
 
 ```text
-SKILL.md                触发、生成、验证与默认交付规则
-assets/base.html        轻量页面骨架
-references/design.md    文档排版指导
-references/diagrams.md  图解指导
-scripts/publish.sh      curl 发布与恢复
-tests/test-publish.sh   无网络的发布回归检查
+SKILL.md                Trigger, authoring, validation, and delivery rules
+assets/base.html        Lightweight page skeleton
+references/design.md    Document layout guidance
+references/diagrams.md  Diagram guidance
+scripts/publish.sh      curl publishing and recovery
+tests/test-publish.sh   Offline publishing regression checks
 ```
 
-本仓库不包含真实客户对话、生产数据、发布凭证或历史复盘报告。
+This repository contains no real customer conversations, production data, publishing credentials, or historical case-review reports.
 
-## 验证
+## Validation
 
 ```bash
 bash -n scripts/publish.sh
 bash tests/test-publish.sh
 ```
 
-测试用替身 curl 模拟接口，不上传文件、不创建线上项目。覆盖 HTTPS 地址回退、失败恢复、恢复时不重复创建、快照校验、错误阶段和凭证输出保护。
+Tests replace curl with a mock. They do not upload files or create live projects. Coverage includes HTTPS URL fallback, failure recovery, avoiding duplicate creation during recovery, snapshot integrity, error stages, and credential-output protection.
 
-## 许可与来源
+## Documentation languages
 
-项目采用 [MIT License](LICENSE)。发布流程参考 Netlify CLI 的匿名 Drop 协议实现，保留其 MIT 声明；HTML 示例理念与来源边界见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+English is the default documentation language. The README is also available in [Chinese](README.zh.md), with a language switch at the top of each version. Keep both versions aligned when changing installation, behavior, dependencies, or limitations. Skill instructions, technical references, and licensing notices are maintained in English.
 
-使用这个 skill 不会自动获得所输入文章、图片、用户对话或其他第三方材料的再发布权，也不会自动把生成页面中的所有内容变成 MIT。复制第三方代码或模板时，需要保留相应许可和署名。
+## License and references
 
-Codex、Claude、Claude Code 和 Netlify 名称仅用于说明兼容性和参考来源。本项目不隶属于 OpenAI、Anthropic 或 Netlify，也未获得这些公司的背书。
+This project uses the [MIT License](LICENSE). The publishing flow references Netlify CLI's anonymous Drop protocol implementation and retains its MIT notice. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the HTML example references and provenance boundaries.
+
+Using this skill does not grant republication rights to supplied articles, images, conversations, or other third-party material. It does not automatically make all generated page content MIT-licensed. Preserve the applicable licenses and attribution when copying third-party code or templates.
+
+Codex, Claude, Claude Code, and Netlify are named only to describe compatibility and references. This project is not affiliated with or endorsed by OpenAI, Anthropic, or Netlify.
