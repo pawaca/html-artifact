@@ -1,12 +1,17 @@
 # References and third-party notices
 
-## Netlify CLI — MIT
+## here.now API
 
-The anonymous publishing protocol in `scripts/publish.sh` was implemented in
+The current shell publisher implements the documented HTTP flow at
+https://here.now/docs. No here.now skill, installer, or SDK code is bundled.
+
+## Former Netlify CLI integration — MIT
+
+The former anonymous Netlify publishing protocol was implemented in
 shell with reference to Netlify CLI's
 [drop-api.ts](https://github.com/netlify/cli/blob/main/src/utils/deploy/drop-api.ts).
 The upstream TypeScript file is not bundled. We retain the upstream MIT notice
-for the referenced/adapted publishing flow. The shell implementation adds local
+for the referenced/adapted publishing flow. That shell implementation added local
 snapshots, receipts, same-deployment recovery and HTTPS URL selection.
 
 Source license: https://github.com/netlify/cli/blob/main/LICENSE

@@ -2,20 +2,21 @@
 
 English | [中文](README.zh.md)
 
-**Give Codex an artifact workflow: create a visual document, open it, and share it.**
+**Give Codex an artifact workflow: create a visual document, open it locally, and share it on request.**
 
-This Agent Skill brings an artifact-style experience to Codex, similar to the artifact workflows available in Claude / Claude Code environments. It turns reports, explanations, comparisons, and case reviews into complete HTML pages and delivers a temporary link you can open immediately.
+This Agent Skill brings an artifact-style experience to Codex, similar to the artifact workflows available in Claude / Claude Code environments. It turns reports, explanations, comparisons, and case reviews into complete HTML pages and opens the saved file locally. Temporary online sharing is available when explicitly requested.
 
 It is a community implementation, not a built-in Codex or Claude Code feature, and does not reproduce their native interfaces. In Claude Code, prefer an available built-in artifact capability when it meets the request. This skill primarily serves Codex and other environments.
 
-No frontend build chain, Python, Node, hosting account, or Netlify CLI is required.
+No frontend build chain, Python, Node, hosting account, or provider CLI is required.
 
 ## What you get
 
 - **Self-contained HTML** — inline CSS, optional JavaScript, and SVG; the saved file also works offline.
 - **Readable documents** — responsive layouts, clear hierarchy, and print styles without React or a build step.
 - **Concrete case reviews** — dialogue excerpts beside annotations, separating facts, inferences, proposed fixes, and acceptance criteria.
-- **Temporary sharing by default** — anonymous Netlify Drop publishing with a URL, viewing password, and retention notice.
+- **Local delivery by default** — saves the HTML and opens it with the system default application.
+- **Sharing on request** — anonymous here.now publishing with a URL, expiry time, and retention notice.
 - **Recoverable publishing** — continue the same deployment after an upload or status-check failure instead of creating another project.
 
 Use it for reports, technical explanations, research summaries, comparisons, and review documents. Keep simple answers in chat; use a dedicated development workflow for production websites and full applications.
@@ -50,11 +51,17 @@ Review these issues case by case. Quote the relevant dialogue, annotate what wen
 Create a single-file HTML document. Save it locally only; do not upload it.
 ```
 
-**The default workflow includes uploading.** This skill publishes the completed HTML to a third-party anonymous hosting service without requiring a separate publishing request. An explicit local-only instruction, a no-upload request, or an existing confidentiality or sharing constraint overrides that default. When a built-in Claude Code artifact workflow meets the request, use its delivery mechanism without an additional upload.
+**The default workflow stays local.** After generating and checking a page, the skill opens the file with the operating system's default application and returns its absolute file link. Say “do not open” or “only generate the file” to skip opening. Revisions keep the same file and prompt you to refresh rather than creating duplicate tabs. If opening fails or no desktop is available, the file is still delivered locally; nothing is uploaded as a fallback.
+
+Upload only on an explicit request such as “upload this to here.now,” “give me a shareable web URL,” or “update the hosted version.” “Create an artifact,” “preview,” “open,” and ordinary edits remain local. A previous upload does not authorize future uploads unless you request ongoing synchronization. The skill does not routinely ask whether to upload or repeat an already answered approval question. Existing confidentiality and sharing constraints still apply. A built-in Claude Code artifact workflow uses its own delivery mechanism.
+
+```text
+Upload this completed HTML to here.now and give me a shareable web URL.
+```
 
 ## Publishing script
 
-Requires Bash 3.2+, curl 7.55+, jq, and one of `sha1sum`, `shasum`, or `openssl`. Use macOS, Linux, or a shell environment with these tools. Native PowerShell is not a target runtime.
+For explicitly requested uploads only. Requires Bash 3.2+, curl 7.55+, jq, and one of `sha256sum`, `shasum`, or `openssl`. Use macOS, Linux, or a shell environment with these tools. Native PowerShell is not a target runtime.
 
 ```bash
 # Validate the input without making network requests
@@ -67,14 +74,15 @@ bash scripts/publish.sh /absolute/path/to/index.html
 bash scripts/publish.sh --resume /absolute/path/to/receipt.json
 ```
 
-On success, stdout contains JSON; progress and errors go to stderr. The JSON includes `url`, `password`, `retention`, and verification status.
+On success, stdout contains JSON; progress and errors go to stderr. The JSON includes `url`, `expires_at`, `retention`, and verification status.
 
-- Netlify retains unclaimed deployments for about **one hour**. There is no custom expiration setting; retention is controlled by the provider.
-- The viewing password, `My-Drop-Site`, is a shared service default and **must not be treated as private access control**. Do not use it to share material that cannot be public.
-- Only the specified file is uploaded, up to 10 MiB. Relative images, attachments, raw datasets, and entire directories are not uploaded.
-- HTML snapshots and recovery receipts containing tokens stay in `~/.codex/artifacts/.netlify-drop/`. Set `HTML_ARTIFACT_STATE_DIR` to choose another location. Do not publish these receipts or commit them to Git.
-- No project claim or login is required. If the API fails, keep the local HTML; do not automatically switch to Sites, another provider, or an authenticated deployment.
-- The anonymous endpoints follow Netlify CLI's implementation and may change. Deployment readiness does not imply browser visual verification.
+- Anonymous here.now sites expire after **24 hours** under provider policy. There is no custom anonymous TTL; expiry is not a guarantee about backup deletion.
+- Sites have **no viewing password**; anyone with the URL can read them. The template and skill default to `noindex,nofollow`, which discourages search indexing but does not restrict access. Server-side passwords require claiming the site with an account.
+- Only the specified file is uploaded, up to 10 MiB. Relative assets, raw datasets, and directories are not uploaded.
+- Private HTML snapshots and recovery receipts stay in `~/.codex/artifacts/.here-now/`. Set `HTML_ARTIFACT_STATE_DIR` to override this. Receipts contain claim tokens and signed upload URLs; never publish or commit them. Old Netlify receipts are not compatible.
+- No login configuration is read. On failure, retain the artifact; resume the same deployment when possible. On 429, stop. Do not automatically switch providers or create replacement sites. Signed upload URLs expire after one hour; expired URLs require the documented refresh flow, not another create.
+- Generic display metadata is supplied explicitly. here.now documents AI metadata processing and thumbnail generation; explicit metadata is not a blanket opt-out from all processing. HTML is not encrypted. See [privacy](https://here.now/privacy).
+- The script checks API readiness and exact HTTP content, not browser layout. See [API documentation](https://here.now/docs).
 
 ## Repository layout
 
@@ -104,8 +112,8 @@ English is the default documentation language. The README is also available in [
 
 ## License and references
 
-This project uses the [MIT License](LICENSE). The publishing flow references Netlify CLI's anonymous Drop protocol implementation and retains its MIT notice. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the HTML example references and provenance boundaries.
+This project uses the [MIT License](LICENSE). The publishing flow uses here.now's documented anonymous API; the former Netlify integration's MIT notice is retained for provenance. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the HTML example references and provenance boundaries.
 
 Using this skill does not grant republication rights to supplied articles, images, conversations, or other third-party material. It does not automatically make all generated page content MIT-licensed. Preserve the applicable licenses and attribution when copying third-party code or templates.
 
-Codex, Claude, Claude Code, and Netlify are named only to describe compatibility and references. This project is not affiliated with or endorsed by OpenAI, Anthropic, or Netlify.
+Codex, Claude, Claude Code, and here.now are named only to describe compatibility and references. This project is not affiliated with or endorsed by OpenAI, Anthropic, or here.now.
