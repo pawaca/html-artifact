@@ -13,7 +13,7 @@ No frontend build chain, Python, Node, hosting account, or provider CLI is requi
 ## What you get
 
 - **Self-contained HTML** — inline CSS, optional JavaScript, and SVG; the saved file also works offline.
-- **Readable documents** — responsive layouts, clear hierarchy, and print styles without React or a build step.
+- **Deliberate visual design** — subject-specific palettes, typography, responsive composition, and purposeful graphics or interaction without React or a build step.
 - **Concrete case reviews** — dialogue excerpts beside annotations, separating facts, inferences, proposed fixes, and acceptance criteria.
 - **Local delivery by default** — saves the HTML and opens it with the system default application.
 - **Sharing on request** — anonymous here.now publishing with a URL, expiry time, and retention notice.

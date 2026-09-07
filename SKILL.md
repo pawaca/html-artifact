@@ -5,7 +5,7 @@ description: Primarily for non-Claude Code environments. Create or revise standa
 
 # HTML artifact
 
-Turn the requested content into a page worth reading. Default to a static document with purposeful typography and layout. Interaction is optional, not a quality target.
+Turn the requested content into a page worth reading. Use deliberate typography, color, and composition. Lightweight means self-contained delivery without unnecessary infrastructure, not minimal visual design. Choose a static document or purposeful interaction according to what best explains the subject.
 
 ## Environment and trigger priority
 
@@ -19,9 +19,9 @@ Turn the requested content into a page worth reading. Default to a static docume
 - Identify the audience, the page's main point, and the relationship the layout should reveal. Keep this design choice brief and internal unless the user asks for options.
 - Read [design.md](references/design.md) for the first page in a thread. Read [diagrams.md](references/diagrams.md) only when a figure would materially help. Do not load unrelated design or interactive-visualization workflows just to produce this document.
 - Reuse [base.html](assets/base.html) as a small starting skeleton. Adapt its palette and layout to the subject or an existing user-provided design system; it is not a required visual template. Preserve the existing design on revisions unless a redesign is requested.
-- Write one complete HTML file, with inline CSS and any necessary inline SVG. Use system fonts with Chinese fallbacks. No required network resources, build tools, package installs, or development server. The page must work when opened as a local file.
+- Write one complete HTML file, with inline CSS and any necessary inline SVG. Choose distinct typography roles with Chinese fallbacks; use system fonts or appropriately licensed embedded fonts. No required network resources, build tools, package installs, or development server. The page must work when opened as a local file.
 - Default to `<meta name="robots" content="noindex,nofollow">` inside `<head>`, including when revising HTML that did not use the starter. Preserve this on revisions unless the user explicitly requests indexing. This is a crawler instruction, not access control; do not add a blanket robots.txt crawl block that prevents crawlers from reading noindex.
-- Default to no JavaScript. Native anchors and `details` are enough for most navigation and disclosure. Add scripts only for a requested or clearly useful interaction; keep the core explanation visible without running them.
+- Use native HTML and CSS where they suffice. Small inline scripts, explanatory interactions, and purposeful motion are welcome when they improve understanding or the requested visual treatment. Do not add controls merely to make a page seem interactive; keep the core explanation available without scripts.
 - Use real supplied or verified content. State unknowns and label illustrative numbers. Keep source links close to the relevant claims when research is involved.
 - Match the structure to the content: comparisons can be parallel, changes can be before/after, processes can have a diagram. Well-composed prose is also a valid artifact. Do not invent dashboard metrics, controls, diagrams, or cards to fill space.
 
