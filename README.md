@@ -4,7 +4,7 @@ English | [中文](README.zh.md)
 
 **Turn an explanation into a page worth reading. Open it locally. Share it when you choose.**
 
-HTML Artifact is an agent skill for creating standalone HTML reports, comparisons, concept explainers, implementation plans, and case reviews. It guides the agent through content structure, visual design, generation, checking, and delivery.
+HTML Artifact is an agent skill for creating standalone HTML reports, comparisons, concept explainers, implementation plans, case reviews, and UI mockups on an OpenPencil canvas. It guides the agent through content structure, visual design, generation, checking, and delivery.
 
 Lightweight does not mean visually plain. Pages can use deliberate typography, subject-specific palettes, diagrams, and focused interaction without a frontend framework or build pipeline.
 
@@ -70,6 +70,46 @@ Upload this completed page to here.now and give me a shareable web URL.
 ```
 
 “Create an artifact,” “preview,” “open,” and ordinary edits stay local. Upload authorization applies to the specified page and operation; a previous upload does not authorize future uploads unless you request ongoing synchronization. The agent need not ask about uploading after every local delivery or repeat an already granted approval.
+
+## UI design canvas
+
+For multiple screens, wireframes, or desktop/mobile variants in a Figma-like
+workspace, the skill selects the UI canvas template. It reuses OpenPencil's scene
+graph, Skia renderer, and Yoga layout. The canvas fills the page with compact
+pan/zoom and fit controls; editor headers and side panels are omitted.
+
+```text
+Use html-artifact to design desktop and mobile screens for a reading app.
+Place them on an OpenPencil canvas so I can compare layouts and inspect layers.
+```
+
+The agent authors `scene.json` and generates `index.html`; revisions update the
+same JSON and regenerate. Readers open the HTML directly, without installing
+OpenPencil, running a server, or connecting to the network. The UI consists of
+design layers; use ordinary HTML when buttons and forms need to actually work.
+
+```bash
+python3 -m venv "$HOME/.cache/html-artifact/canvas-venv"
+"$HOME/.cache/html-artifact/canvas-venv/bin/python" -m pip install -r scripts/canvas-requirements.txt
+"$HOME/.cache/html-artifact/canvas-venv/bin/python" scripts/create-ui-canvas.py assets/ui-canvas/example.json \
+  --output /absolute/path/to/preview/index.html
+```
+
+Generation uses Python 3.9+ with fontTools/Brotli; reuse the environment after
+the initial setup. Fonts are automatically subset from the original bundled
+faces on every revision, including newly added characters. If only the HTML
+remains, `--extract-scene` recovers its editable JSON. Runtime code and fonts are
+embedded; no companion files need uploading. The example is about **4.74 MB
+(4.52 MiB)**, reduced from 8.75 MB; images may push
+it past the anonymous publisher's 10 MiB limit. The canvas needs a recent browser
+with JavaScript, WebAssembly, and WebGL. A content outline provides the
+script-disabled and print fallback.
+
+The template is an agent-authored, inspectable design canvas. It does not include
+the complete app, manual drawing editor, collaboration, or `.fig` import/export.
+See the [UI canvas guide](references/ui-canvas.md) for authoring, and the
+[OpenPencil integration notes](references/open-pencil-integration.md) for component
+analysis and maintenance.
 
 ## Design and output
 
@@ -137,6 +177,9 @@ SKILL.md                Workflow, authoring, and delivery rules
 references/design.md    Typography, composition, themes, and visual checks
 references/diagrams.md  Mechanism diagrams and inline SVG guidance
 assets/base.html        Adaptable standalone page skeleton
+assets/ui-canvas/       UI canvas template, example, runtime, and fonts
+references/ui-canvas.md UI scene format and generation guide
+scripts/create-ui-canvas.py  Single-file UI canvas generator
 scripts/publish.sh      Anonymous here.now publishing and recovery
 tests/test-publish.sh   Offline publisher regression checks
 ```
@@ -147,6 +190,12 @@ bash tests/test-publish.sh
 ```
 
 Tests replace curl with a mock and create no live sites. They cover anonymous publication, dry runs, expiry output, private receipts, failure recovery, exact-content verification, snapshot integrity, URL restrictions, rate-limit stopping, and ambiguous creation. They do not validate generated page layouts or provider retention guarantees.
+
+Canvas maintainers can run `npm ci && npm run build:canvas`, then
+`CANVAS_PYTHON="$HOME/.cache/html-artifact/canvas-venv/bin/python" npm run test:canvas`.
+This toolchain updates the runtime; normal generation does not need npm. Canvas
+tests use installed Google Chrome (or `CHROME_PATH`) and verify real offline
+rendering, Chinese glyph pixels, layout, selection, and navigation.
 
 English and Chinese READMEs describe the same behavior and should be updated together. Skill instructions and technical references are maintained in English.
 

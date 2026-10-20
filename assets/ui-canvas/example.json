@@ -1,0 +1,1008 @@
+{
+  "version": 1,
+  "title": "拾页 · 阅读空间",
+  "description": "虚构阅读产品的桌面端与移动端设计示例。通过平移和缩放比较两种屏幕下的布局与内容层级。",
+  "lang": "zh-CN",
+  "background": "#e9eaed",
+  "artboards": [
+    {
+      "type": "FRAME",
+      "name": "桌面端 · 我的书架",
+      "x": 0,
+      "y": 0,
+      "width": 820,
+      "height": 660,
+      "fill": "#fbfcf8",
+      "children": [
+        {
+          "type": "FRAME",
+          "name": "侧边导航",
+          "x": 0,
+          "y": 0,
+          "width": 168,
+          "height": 660,
+          "fill": "#f3f5ed",
+          "children": [
+            {
+              "type": "TEXT",
+              "name": "拾页",
+              "x": 24,
+              "y": 24,
+              "width": 115,
+              "height": 38.400000000000006,
+              "text": "拾页",
+              "fontSize": 24,
+              "fontWeight": 700,
+              "fill": "#273d35"
+            },
+            {
+              "type": "TEXT",
+              "name": "给阅读一点空间",
+              "x": 24,
+              "y": 65,
+              "width": 130,
+              "height": 17.6,
+              "text": "给阅读一点空间",
+              "fontSize": 11,
+              "fontWeight": 400,
+              "fill": "#81887e"
+            },
+            {
+              "type": "RECTANGLE",
+              "name": "当前导航",
+              "x": 12,
+              "y": 120,
+              "width": 144,
+              "height": 40,
+              "fill": "#e7ede2",
+              "cornerRadius": 7
+            },
+            {
+              "type": "TEXT",
+              "name": "我的书架",
+              "x": 28,
+              "y": 129,
+              "width": 116,
+              "height": 20.8,
+              "text": "我的书架",
+              "fontSize": 13,
+              "fontWeight": 600,
+              "fill": "#273d35"
+            },
+            {
+              "type": "TEXT",
+              "name": "阅读笔记",
+              "x": 28,
+              "y": 184,
+              "width": 116,
+              "height": 20.8,
+              "text": "阅读笔记",
+              "fontSize": 13,
+              "fontWeight": 400,
+              "fill": "#758073"
+            },
+            {
+              "type": "TEXT",
+              "name": "发现好书",
+              "x": 28,
+              "y": 230,
+              "width": 116,
+              "height": 20.8,
+              "text": "发现好书",
+              "fontSize": 13,
+              "fontWeight": 400,
+              "fill": "#758073"
+            },
+            {
+              "type": "RECTANGLE",
+              "name": "分隔线",
+              "x": 24,
+              "y": 288,
+              "width": 120,
+              "height": 1,
+              "fill": "#e3e8df",
+              "cornerRadius": 0
+            },
+            {
+              "type": "TEXT",
+              "name": "我的书单",
+              "x": 28,
+              "y": 311,
+              "width": 110,
+              "height": 17.6,
+              "text": "我的书单",
+              "fontSize": 11,
+              "fontWeight": 400,
+              "fill": "#92998d"
+            },
+            {
+              "type": "TEXT",
+              "name": "慢下来，读一本书",
+              "x": 28,
+              "y": 350,
+              "width": 120,
+              "height": 19.200000000000003,
+              "text": "慢下来，读一本书",
+              "fontSize": 12,
+              "fontWeight": 400,
+              "fill": "#66715f"
+            },
+            {
+              "type": "TEXT",
+              "name": "设计与生活",
+              "x": 28,
+              "y": 387,
+              "width": 110,
+              "height": 19.200000000000003,
+              "text": "设计与生活",
+              "fontSize": 12,
+              "fontWeight": 400,
+              "fill": "#66715f"
+            },
+            {
+              "type": "ELLIPSE",
+              "name": "头像",
+              "x": 24,
+              "y": 590,
+              "width": 30,
+              "height": 30,
+              "fill": "#c1ccb8"
+            },
+            {
+              "type": "TEXT",
+              "name": "林间",
+              "x": 64,
+              "y": 592,
+              "width": 70,
+              "height": 20.8,
+              "text": "林间",
+              "fontSize": 13,
+              "fontWeight": 600,
+              "fill": "#273d35"
+            }
+          ]
+        },
+        {
+          "type": "TEXT",
+          "name": "我的书架",
+          "x": 200,
+          "y": 30,
+          "width": 300,
+          "height": 40.0,
+          "text": "我的书架",
+          "fontSize": 25,
+          "fontWeight": 600,
+          "fill": "#273d35"
+        },
+        {
+          "type": "TEXT",
+          "name": "收藏值得反复翻阅的文字。",
+          "x": 200,
+          "y": 69,
+          "width": 380,
+          "height": 19.200000000000003,
+          "text": "收藏值得反复翻阅的文字。",
+          "fontSize": 12,
+          "fontWeight": 400,
+          "fill": "#87917f"
+        },
+        {
+          "type": "FRAME",
+          "name": "添加书籍",
+          "x": 678,
+          "y": 32,
+          "width": 110,
+          "height": 36,
+          "fill": "#244b3c",
+          "children": [
+            {
+              "type": "TEXT",
+              "name": "添加书籍",
+              "x": 0,
+              "y": 0,
+              "width": 86,
+              "height": 19.200000000000003,
+              "text": "添加书籍",
+              "fontSize": 12,
+              "fontWeight": 400,
+              "fill": "#ffffff"
+            }
+          ],
+          "cornerRadius": 7,
+          "layout": {
+            "direction": "HORIZONTAL",
+            "padding": 12,
+            "align": "CENTER",
+            "justify": "CENTER"
+          }
+        },
+        {
+          "type": "FRAME",
+          "name": "书架操作",
+          "x": 200,
+          "y": 101,
+          "width": 588,
+          "height": 32,
+          "fill": "#fbfcf8",
+          "children": [
+            {
+              "type": "TEXT",
+              "name": "全部书籍",
+              "x": 0,
+              "y": 0,
+              "width": 70,
+              "height": 19.200000000000003,
+              "text": "全部书籍",
+              "fontSize": 12,
+              "fontWeight": 600,
+              "fill": "#273d35"
+            },
+            {
+              "type": "TEXT",
+              "name": "正在阅读",
+              "x": 0,
+              "y": 0,
+              "width": 70,
+              "height": 19.200000000000003,
+              "text": "正在阅读",
+              "fontSize": 12,
+              "fontWeight": 400,
+              "fill": "#84907d"
+            },
+            {
+              "type": "TEXT",
+              "name": "已读完",
+              "x": 0,
+              "y": 0,
+              "width": 70,
+              "height": 19.200000000000003,
+              "text": "已读完",
+              "fontSize": 12,
+              "fontWeight": 400,
+              "fill": "#84907d"
+            }
+          ],
+          "layout": {
+            "direction": "HORIZONTAL",
+            "gap": 20,
+            "align": "CENTER"
+          }
+        },
+        {
+          "type": "FRAME",
+          "name": "继续阅读",
+          "x": 200,
+          "y": 145,
+          "width": 588,
+          "height": 147,
+          "fill": "#edf0e4",
+          "children": [
+            {
+              "type": "TEXT",
+              "name": "READING MOMENT",
+              "x": 22,
+              "y": 17,
+              "width": 250,
+              "height": 16.0,
+              "text": "READING MOMENT",
+              "fontSize": 10,
+              "fontWeight": 500,
+              "fill": "#6a7b5f"
+            },
+            {
+              "type": "TEXT",
+              "name": "把日子读慢一点。",
+              "x": 22,
+              "y": 42,
+              "width": 410,
+              "height": 41.6,
+              "text": "把日子读慢一点。",
+              "fontSize": 26,
+              "fontWeight": 600,
+              "fill": "#273d35"
+            },
+            {
+              "type": "TEXT",
+              "name": "翻开上次停留的那一页，让思绪自在生长。",
+              "x": 22,
+              "y": 87,
+              "width": 395,
+              "height": 20.8,
+              "text": "翻开上次停留的那一页，让思绪自在生长。",
+              "fontSize": 13,
+              "fontWeight": 400,
+              "fill": "#74806b"
+            },
+            {
+              "type": "ELLIPSE",
+              "name": "装饰圆形",
+              "x": 483,
+              "y": 22,
+              "width": 88,
+              "height": 88,
+              "fill": "#dce4cf"
+            },
+            {
+              "type": "RECTANGLE",
+              "name": "书本",
+              "x": 505,
+              "y": 35,
+              "width": 47,
+              "height": 65,
+              "fill": "#6e876b",
+              "cornerRadius": 3,
+              "rotation": 12
+            }
+          ],
+          "cornerRadius": 12
+        },
+        {
+          "type": "TEXT",
+          "name": "正在阅读",
+          "x": 200,
+          "y": 321,
+          "width": 280,
+          "height": 27.200000000000003,
+          "text": "正在阅读",
+          "fontSize": 17,
+          "fontWeight": 600,
+          "fill": "#273d35"
+        },
+        {
+          "type": "TEXT",
+          "name": "查看全部",
+          "x": 721,
+          "y": 323,
+          "width": 70,
+          "height": 17.6,
+          "text": "查看全部",
+          "fontSize": 11,
+          "fontWeight": 400,
+          "fill": "#7b8970"
+        },
+        {
+          "type": "FRAME",
+          "name": "山间来信",
+          "x": 200,
+          "y": 363,
+          "width": 184,
+          "height": 230,
+          "fill": "#ffffff",
+          "children": [
+            {
+              "type": "RECTANGLE",
+              "name": "封面",
+              "x": 12,
+              "y": 12,
+              "width": 160,
+              "height": 130,
+              "fill": "#7b8e71",
+              "cornerRadius": 6
+            },
+            {
+              "type": "RECTANGLE",
+              "name": "书脊",
+              "x": 22,
+              "y": 12,
+              "width": 2,
+              "height": 130,
+              "fill": "#ffffff40",
+              "cornerRadius": 0
+            },
+            {
+              "type": "TEXT",
+              "name": "山间来信",
+              "x": 36,
+              "y": 39,
+              "width": 120,
+              "height": 33.6,
+              "text": "山间来信",
+              "fontSize": 21,
+              "fontWeight": 600,
+              "fill": "#ffffff"
+            },
+            {
+              "type": "TEXT",
+              "name": "阅读示例 · 散文",
+              "x": 36,
+              "y": 102,
+              "width": 120,
+              "height": 16.0,
+              "text": "阅读示例 · 散文",
+              "fontSize": 10,
+              "fontWeight": 400,
+              "fill": "#ffffffc0"
+            },
+            {
+              "type": "TEXT",
+              "name": "山间来信",
+              "x": 14,
+              "y": 155,
+              "width": 156,
+              "height": 24.0,
+              "text": "山间来信",
+              "fontSize": 15,
+              "fontWeight": 600,
+              "fill": "#273d35"
+            },
+            {
+              "type": "TEXT",
+              "name": "阅读示例 · 散文",
+              "x": 14,
+              "y": 183,
+              "width": 156,
+              "height": 19.200000000000003,
+              "text": "阅读示例 · 散文",
+              "fontSize": 12,
+              "fontWeight": 400,
+              "fill": "#7b817c"
+            },
+            {
+              "type": "RECTANGLE",
+              "name": "阅读进度背景",
+              "x": 14,
+              "y": 211,
+              "width": 156,
+              "height": 3,
+              "fill": "#edf0e9",
+              "cornerRadius": 1
+            },
+            {
+              "type": "RECTANGLE",
+              "name": "阅读进度",
+              "x": 14,
+              "y": 211,
+              "width": 90.47999999999999,
+              "height": 3,
+              "fill": "#778c75",
+              "cornerRadius": 1
+            }
+          ],
+          "cornerRadius": 10,
+          "stroke": {
+            "color": "#e8ebe4",
+            "width": 1
+          }
+        },
+        {
+          "type": "FRAME",
+          "name": "日常的形状",
+          "x": 402,
+          "y": 363,
+          "width": 184,
+          "height": 230,
+          "fill": "#ffffff",
+          "children": [
+            {
+              "type": "RECTANGLE",
+              "name": "封面",
+              "x": 12,
+              "y": 12,
+              "width": 160,
+              "height": 130,
+              "fill": "#ba9a79",
+              "cornerRadius": 6
+            },
+            {
+              "type": "RECTANGLE",
+              "name": "书脊",
+              "x": 22,
+              "y": 12,
+              "width": 2,
+              "height": 130,
+              "fill": "#ffffff40",
+              "cornerRadius": 0
+            },
+            {
+              "type": "TEXT",
+              "name": "日常的形状",
+              "x": 36,
+              "y": 39,
+              "width": 120,
+              "height": 33.6,
+              "text": "日常的形状",
+              "fontSize": 21,
+              "fontWeight": 600,
+              "fill": "#ffffff"
+            },
+            {
+              "type": "TEXT",
+              "name": "阅读示例 · 设计",
+              "x": 36,
+              "y": 102,
+              "width": 120,
+              "height": 16.0,
+              "text": "阅读示例 · 设计",
+              "fontSize": 10,
+              "fontWeight": 400,
+              "fill": "#ffffffc0"
+            },
+            {
+              "type": "TEXT",
+              "name": "日常的形状",
+              "x": 14,
+              "y": 155,
+              "width": 156,
+              "height": 24.0,
+              "text": "日常的形状",
+              "fontSize": 15,
+              "fontWeight": 600,
+              "fill": "#273d35"
+            },
+            {
+              "type": "TEXT",
+              "name": "阅读示例 · 设计",
+              "x": 14,
+              "y": 183,
+              "width": 156,
+              "height": 19.200000000000003,
+              "text": "阅读示例 · 设计",
+              "fontSize": 12,
+              "fontWeight": 400,
+              "fill": "#7b817c"
+            },
+            {
+              "type": "RECTANGLE",
+              "name": "阅读进度背景",
+              "x": 14,
+              "y": 211,
+              "width": 156,
+              "height": 3,
+              "fill": "#edf0e9",
+              "cornerRadius": 1
+            },
+            {
+              "type": "RECTANGLE",
+              "name": "阅读进度",
+              "x": 14,
+              "y": 211,
+              "width": 90.47999999999999,
+              "height": 3,
+              "fill": "#778c75",
+              "cornerRadius": 1
+            }
+          ],
+          "cornerRadius": 10,
+          "stroke": {
+            "color": "#e8ebe4",
+            "width": 1
+          }
+        },
+        {
+          "type": "FRAME",
+          "name": "时间的留白",
+          "x": 604,
+          "y": 363,
+          "width": 184,
+          "height": 230,
+          "fill": "#ffffff",
+          "children": [
+            {
+              "type": "RECTANGLE",
+              "name": "封面",
+              "x": 12,
+              "y": 12,
+              "width": 160,
+              "height": 130,
+              "fill": "#788b96",
+              "cornerRadius": 6
+            },
+            {
+              "type": "RECTANGLE",
+              "name": "书脊",
+              "x": 22,
+              "y": 12,
+              "width": 2,
+              "height": 130,
+              "fill": "#ffffff40",
+              "cornerRadius": 0
+            },
+            {
+              "type": "TEXT",
+              "name": "时间的留白",
+              "x": 36,
+              "y": 39,
+              "width": 120,
+              "height": 33.6,
+              "text": "时间的留白",
+              "fontSize": 21,
+              "fontWeight": 600,
+              "fill": "#ffffff"
+            },
+            {
+              "type": "TEXT",
+              "name": "阅读示例 · 随笔",
+              "x": 36,
+              "y": 102,
+              "width": 120,
+              "height": 16.0,
+              "text": "阅读示例 · 随笔",
+              "fontSize": 10,
+              "fontWeight": 400,
+              "fill": "#ffffffc0"
+            },
+            {
+              "type": "TEXT",
+              "name": "时间的留白",
+              "x": 14,
+              "y": 155,
+              "width": 156,
+              "height": 24.0,
+              "text": "时间的留白",
+              "fontSize": 15,
+              "fontWeight": 600,
+              "fill": "#273d35"
+            },
+            {
+              "type": "TEXT",
+              "name": "阅读示例 · 随笔",
+              "x": 14,
+              "y": 183,
+              "width": 156,
+              "height": 19.200000000000003,
+              "text": "阅读示例 · 随笔",
+              "fontSize": 12,
+              "fontWeight": 400,
+              "fill": "#7b817c"
+            },
+            {
+              "type": "RECTANGLE",
+              "name": "阅读进度背景",
+              "x": 14,
+              "y": 211,
+              "width": 156,
+              "height": 3,
+              "fill": "#edf0e9",
+              "cornerRadius": 1
+            },
+            {
+              "type": "RECTANGLE",
+              "name": "阅读进度",
+              "x": 14,
+              "y": 211,
+              "width": 90.47999999999999,
+              "height": 3,
+              "fill": "#778c75",
+              "cornerRadius": 1
+            }
+          ],
+          "cornerRadius": 10,
+          "stroke": {
+            "color": "#e8ebe4",
+            "width": 1
+          }
+        },
+        {
+          "type": "TEXT",
+          "name": "虚构产品界面 · 用于展示画布模板",
+          "x": 200,
+          "y": 622,
+          "width": 550,
+          "height": 16.0,
+          "text": "虚构产品界面 · 用于展示画布模板",
+          "fontSize": 10,
+          "fontWeight": 400,
+          "fill": "#9ca393"
+        }
+      ],
+      "clipsContent": true,
+      "shadow": {
+        "color": "#253b3418",
+        "x": 0,
+        "y": 8,
+        "blur": 24
+      }
+    },
+    {
+      "type": "FRAME",
+      "name": "移动端 · 阅读时刻",
+      "x": 900,
+      "y": 0,
+      "width": 390,
+      "height": 760,
+      "fill": "#fbfcf8",
+      "children": [
+        {
+          "type": "TEXT",
+          "name": "9:41",
+          "x": 24,
+          "y": 13,
+          "width": 80,
+          "height": 20.8,
+          "text": "9:41",
+          "fontSize": 13,
+          "fontWeight": 600,
+          "fill": "#273d35"
+        },
+        {
+          "type": "TEXT",
+          "name": "拾页",
+          "x": 24,
+          "y": 54,
+          "width": 230,
+          "height": 43.2,
+          "text": "拾页",
+          "fontSize": 27,
+          "fontWeight": 700,
+          "fill": "#273d35"
+        },
+        {
+          "type": "ELLIPSE",
+          "name": "个人头像",
+          "x": 334,
+          "y": 56,
+          "width": 32,
+          "height": 32,
+          "fill": "#c1ccb8"
+        },
+        {
+          "type": "TEXT",
+          "name": "今日，也留一点时间给自己。",
+          "x": 24,
+          "y": 104,
+          "width": 330,
+          "height": 20.8,
+          "text": "今日，也留一点时间给自己。",
+          "fontSize": 13,
+          "fontWeight": 400,
+          "fill": "#818d78"
+        },
+        {
+          "type": "FRAME",
+          "name": "今日阅读",
+          "x": 24,
+          "y": 152,
+          "width": 342,
+          "height": 293,
+          "fill": "#edf0e4",
+          "children": [
+            {
+              "type": "TEXT",
+              "name": "CONTINUE READING",
+              "x": 20,
+              "y": 17,
+              "width": 280,
+              "height": 16.0,
+              "text": "CONTINUE READING",
+              "fontSize": 10,
+              "fontWeight": 500,
+              "fill": "#76876a"
+            },
+            {
+              "type": "RECTANGLE",
+              "name": "书封",
+              "x": 20,
+              "y": 55,
+              "width": 99,
+              "height": 145,
+              "fill": "#7b8e71",
+              "cornerRadius": 5
+            },
+            {
+              "type": "RECTANGLE",
+              "name": "书脊",
+              "x": 29,
+              "y": 55,
+              "width": 2,
+              "height": 145,
+              "fill": "#ffffff40",
+              "cornerRadius": 0
+            },
+            {
+              "type": "TEXT",
+              "name": "山间\n来信",
+              "x": 40,
+              "y": 78,
+              "width": 64,
+              "height": 80,
+              "text": "山间\n来信",
+              "fontSize": 23,
+              "fontWeight": 600,
+              "fill": "#ffffff"
+            },
+            {
+              "type": "TEXT",
+              "name": "山间来信",
+              "x": 141,
+              "y": 63,
+              "width": 178,
+              "height": 32.0,
+              "text": "山间来信",
+              "fontSize": 20,
+              "fontWeight": 600,
+              "fill": "#273d35"
+            },
+            {
+              "type": "TEXT",
+              "name": "给忙碌生活的一封信",
+              "x": 141,
+              "y": 102,
+              "width": 178,
+              "height": 19.200000000000003,
+              "text": "给忙碌生活的一封信",
+              "fontSize": 12,
+              "fontWeight": 400,
+              "fill": "#7e8c74"
+            },
+            {
+              "type": "TEXT",
+              "name": "从第 42 页继续",
+              "x": 141,
+              "y": 158,
+              "width": 178,
+              "height": 19.200000000000003,
+              "text": "从第 42 页继续",
+              "fontSize": 12,
+              "fontWeight": 400,
+              "fill": "#6d8063"
+            },
+            {
+              "type": "FRAME",
+              "name": "开始阅读",
+              "x": 20,
+              "y": 224,
+              "width": 302,
+              "height": 44,
+              "fill": "#244b3c",
+              "children": [
+                {
+                  "type": "TEXT",
+                  "name": "开始阅读",
+                  "x": 0,
+                  "y": 0,
+                  "width": 278,
+                  "height": 22.400000000000002,
+                  "text": "开始阅读",
+                  "fontSize": 14,
+                  "fontWeight": 500,
+                  "fill": "#ffffff"
+                }
+              ],
+              "cornerRadius": 8,
+              "layout": {
+                "direction": "HORIZONTAL",
+                "padding": [
+                  10,
+                  12,
+                  10,
+                  12
+                ],
+                "align": "CENTER",
+                "justify": "CENTER"
+              }
+            }
+          ],
+          "cornerRadius": 14
+        },
+        {
+          "type": "TEXT",
+          "name": "随手记下",
+          "x": 24,
+          "y": 477,
+          "width": 300,
+          "height": 28.8,
+          "text": "随手记下",
+          "fontSize": 18,
+          "fontWeight": 600,
+          "fill": "#273d35"
+        },
+        {
+          "type": "FRAME",
+          "name": "笔记卡片",
+          "x": 24,
+          "y": 519,
+          "width": 342,
+          "height": 121,
+          "fill": "#ffffff",
+          "children": [
+            {
+              "type": "TEXT",
+              "name": "让一段文字，成为一天的停顿。",
+              "x": 18,
+              "y": 15,
+              "width": 304,
+              "height": 24.0,
+              "text": "让一段文字，成为一天的停顿。",
+              "fontSize": 15,
+              "fontWeight": 400,
+              "fill": "#273d35"
+            },
+            {
+              "type": "TEXT",
+              "name": "关于阅读的小小想法，都可以留在这里。",
+              "x": 18,
+              "y": 47,
+              "width": 304,
+              "height": 19.200000000000003,
+              "text": "关于阅读的小小想法，都可以留在这里。",
+              "fontSize": 12,
+              "fontWeight": 400,
+              "fill": "#85907c"
+            },
+            {
+              "type": "TEXT",
+              "name": "写一则笔记",
+              "x": 18,
+              "y": 81,
+              "width": 280,
+              "height": 19.200000000000003,
+              "text": "写一则笔记",
+              "fontSize": 12,
+              "fontWeight": 400,
+              "fill": "#536e4a"
+            }
+          ],
+          "cornerRadius": 10,
+          "stroke": {
+            "color": "#e4e8de",
+            "width": 1
+          }
+        },
+        {
+          "type": "RECTANGLE",
+          "name": "底部导航",
+          "x": 0,
+          "y": 690,
+          "width": 390,
+          "height": 70,
+          "fill": "#f3f5ed",
+          "cornerRadius": 0
+        },
+        {
+          "type": "TEXT",
+          "name": "书架",
+          "x": 48,
+          "y": 710,
+          "width": 75,
+          "height": 20.8,
+          "text": "书架",
+          "fontSize": 13,
+          "fontWeight": 600,
+          "fill": "#273d35"
+        },
+        {
+          "type": "TEXT",
+          "name": "笔记",
+          "x": 169,
+          "y": 710,
+          "width": 75,
+          "height": 20.8,
+          "text": "笔记",
+          "fontSize": 13,
+          "fontWeight": 400,
+          "fill": "#929b88"
+        },
+        {
+          "type": "TEXT",
+          "name": "我的",
+          "x": 289,
+          "y": 710,
+          "width": 75,
+          "height": 20.8,
+          "text": "我的",
+          "fontSize": 13,
+          "fontWeight": 400,
+          "fill": "#929b88"
+        },
+        {
+          "type": "RECTANGLE",
+          "name": "手势条",
+          "x": 144,
+          "y": 746,
+          "width": 102,
+          "height": 4,
+          "fill": "#273d35",
+          "cornerRadius": 2
+        }
+      ],
+      "cornerRadius": 24,
+      "clipsContent": true,
+      "shadow": {
+        "color": "#253b3418",
+        "x": 0,
+        "y": 8,
+        "blur": 24
+      }
+    }
+  ]
+}

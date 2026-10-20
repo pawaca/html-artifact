@@ -7,3 +7,5 @@ __pycache__/
 .netlify-drop/
 receipt*.json
 publish-result.json
+node_modules/
+.canvas-build/

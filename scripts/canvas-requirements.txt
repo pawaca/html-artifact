@@ -1,0 +1,3 @@
+# Build-time font subsetting only. Generated HTML needs no packages or network.
+fonttools==4.60.2
+brotli==1.2.0

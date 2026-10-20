@@ -4,7 +4,7 @@
 
 **把需要解释的事，做成值得阅读的页面。本地打开，按需分享。**
 
-HTML Artifact 是一个 agent skill，用于生成独立的 HTML 报告、方案比较、概念解释、实施计划和案例复盘。它指导 agent 完成内容组织、视觉设计、生成、检查和交付。
+HTML Artifact 是一个 agent skill，用于生成独立的 HTML 报告、方案比较、概念解释、实施计划、案例复盘，以及 OpenPencil 画布中的 UI 设计稿。它指导 agent 完成内容组织、视觉设计、生成、检查和交付。
 
 轻量不等于视觉简单。页面可以有精心搭配的字体、贴合主题的配色、图解和有用的交互，无需前端框架或构建流程。
 
@@ -70,6 +70,39 @@ git clone https://github.com/pawaca/html-artifact.git ~/.codex/skills/html-artif
 ```
 
 “生成 artifact”“预览”“打开”和普通修改都保持本地。上传授权针对指定页面和操作；此前上传过不代表后续自动上传，除非明确要求持续同步。agent 不必每次本地交付后追问是否上传，也不重复确认已经获得的授权。
+
+## UI 设计画布
+
+当需要在类似 Figma 的空间里展示多个界面、线框图或桌面/移动端方案时，
+skill 会选择 UI 画布模板。它复用 OpenPencil 的场景树、Skia 渲染器和 Yoga
+布局。页面只展示画布和简洁的缩放、适应画板控件，不带顶部栏和编辑器侧栏。
+
+```text
+用 html-artifact 设计一个阅读应用的桌面端和移动端，
+放在 OpenPencil 画布里，方便比较布局和查看图层。
+```
+
+Agent 编写 `scene.json` 并生成 `index.html`；修改设计时更新同一份 JSON 后重新生成。
+读者直接打开 HTML，不需要安装 OpenPencil、启动服务器或联网。页面中的 UI
+是设计图层；需要实际工作的网页按钮和表单时，使用普通 HTML。
+
+```bash
+python3 -m venv "$HOME/.cache/html-artifact/canvas-venv"
+"$HOME/.cache/html-artifact/canvas-venv/bin/python" -m pip install -r scripts/canvas-requirements.txt
+"$HOME/.cache/html-artifact/canvas-venv/bin/python" scripts/create-ui-canvas.py assets/ui-canvas/example.json \
+  --output /absolute/path/to/preview/index.html
+```
+
+生成使用 Python 3.9+ 和 fontTools/Brotli，首次安装后复用环境。脚本默认按当前
+内容裁剪字体；后续加字时从原始字库重新生成，避免缺字。只剩 HTML 时也可通过
+`--extract-scene` 恢复可编辑的 JSON。运行时和字体已内嵌，上传只需一个 HTML。
+示例文件从约 8.75 MB 降至 **4.74 MB（4.52 MiB）**，加入图片后
+需留意匿名发布的 10 MiB 上限。画布需要新版浏览器的 JavaScript、WebAssembly
+和 WebGL；关闭脚本或打印时提供内容大纲。
+
+当前模板是供 Agent 绘制、读者查看的设计画布，未接入完整应用、手动绘图编辑器、
+协作或 `.fig` 文件导入导出。格式与使用方式见 [UI 画布指南](references/ui-canvas.md)，
+组件分析及维护方式见 [OpenPencil 集成说明](references/open-pencil-integration.md)。
 
 ## 设计与输出
 
@@ -137,6 +170,9 @@ SKILL.md                工作流、生成与交付规则
 references/design.md    字体、构图、主题与视觉检查
 references/diagrams.md  机制图解与内联 SVG 指导
 assets/base.html        可改造的独立页面骨架
+assets/ui-canvas/       UI 画布模板、示例、运行时和字体
+references/ui-canvas.md UI 画布场景格式与生成指南
+scripts/create-ui-canvas.py  单文件 UI 画布生成器
 scripts/publish.sh      here.now 匿名发布与恢复
 tests/test-publish.sh   无网络的发布回归检查
 ```
@@ -147,6 +183,11 @@ bash tests/test-publish.sh
 ```
 
 测试用替身 curl 模拟接口，不创建线上站点。覆盖匿名发布、无网络预检、到期时间输出、私密恢复记录、失败恢复、内容一致性、快照完整性、地址限制、限频停止和创建结果不明确的情况。不验证生成页面的布局或服务方的数据保留承诺。
+
+画布维护者可运行 `npm ci && npm run build:canvas`，然后执行
+`CANVAS_PYTHON="$HOME/.cache/html-artifact/canvas-venv/bin/python" npm run test:canvas`。
+这套构建工具只用于更新运行时；普通生成无需 npm。画布测试使用本机 Google Chrome
+（也可设置 `CHROME_PATH`），验证真实离线渲染、中文像素、布局、选择与缩放。
 
 中英文 README 描述相同行为，应同步更新。Skill 指令与技术参考使用英文维护。
 

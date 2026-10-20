@@ -1,11 +1,29 @@
 ---
 name: html-artifact
-description: Primarily for non-Claude Code environments. Create or revise standalone HTML explainers, reports, comparisons, and case reviews, saving and opening the HTML locally by default, with temporary hosting only when explicitly requested. In Claude Code, prefer its built-in artifact capability when available; use this skill only as a fallback or when explicitly requested. Not for production websites, apps, or ordinary short chat answers.
+description: Primarily for non-Claude Code environments. Create or revise standalone HTML explainers, reports, comparisons, case reviews, and UI mockups on an OpenPencil design canvas. Save and open locally by default; temporary hosting only when explicitly requested. In Claude Code, prefer built-in artifact capability when available unless this skill is explicitly requested. Not for production websites, full design editors, apps, or ordinary short chat answers.
 ---
 
 # HTML artifact
 
 Turn the requested content into a page worth reading. Use deliberate typography, color, and composition. Lightweight means self-contained delivery without unnecessary infrastructure, not minimal visual design. Choose a static document or purposeful interaction according to what best explains the subject.
+
+## Choose the output mode
+
+- **Document:** reports, explanations, comparisons, case reviews, and prose-first
+  content use the regular HTML workflow and [base.html](assets/base.html).
+- **UI design canvas:** UI mockups, wireframes, screen variants, or desktop/mobile
+  designs that benefit from a Figma-like navigable canvas use
+  [ui-canvas.md](references/ui-canvas.md). Read it before authoring the scene.
+  The agent draws with a scene JSON file; the bundled OpenPencil renderer supplies
+  the display and layout. Deliver the canvas itself with compact navigation
+  controls, without editor headers, sidebars, or property panels.
+  Generate with the bundled Python packer, which subsets embedded fonts by
+  default; do not rebuild the engine per artifact. For revisions, edit the scene
+  and regenerate fonts and HTML together. If only the HTML remains, recover its
+  embedded scene with `--extract-scene` as described in the canvas reference.
+- Choose ordinary HTML when UI controls need to actually work as a web prototype.
+  The canvas template displays design layers, not a working product or a full
+  manual design editor. Do not load its reference for ordinary documents.
 
 ## Environment and trigger priority
 
@@ -18,10 +36,10 @@ Turn the requested content into a page worth reading. Use deliberate typography,
 - Write the page in the language requested by the user, or match the conversation language when unspecified. Set the HTML `lang` attribute accordingly.
 - Identify the audience, the page's main point, and the relationship the layout should reveal. Keep this design choice brief and internal unless the user asks for options.
 - Read [design.md](references/design.md) for the first page in a thread. Read [diagrams.md](references/diagrams.md) only when a figure would materially help. Do not load unrelated design or interactive-visualization workflows just to produce this document.
-- Reuse [base.html](assets/base.html) as a small starting skeleton. Adapt its palette and layout to the subject or an existing user-provided design system; it is not a required visual template. Preserve the existing design on revisions unless a redesign is requested.
-- Write one complete HTML file, with inline CSS and any necessary inline SVG. Choose distinct typography roles with Chinese fallbacks; use system fonts or appropriately licensed embedded fonts. No required network resources, build tools, package installs, or development server. The page must work when opened as a local file.
+- For document mode, reuse [base.html](assets/base.html) as a small starting skeleton. Adapt its palette and layout to the subject or an existing user-provided design system; it is not a required visual template. Preserve the existing design on revisions unless a redesign is requested.
+- Deliver one complete HTML file, with inline CSS and any necessary inline SVG. Choose distinct typography roles with Chinese fallbacks; use system fonts or appropriately licensed embedded fonts. No required network resources, runtime package installs, or development server. The page must work when opened as a local file. UI canvas mode uses the bundled Python generator to embed its prebuilt JS/WASM and fonts; preserve its scene JSON beside the HTML for future agent revisions.
 - Default to `<meta name="robots" content="noindex,nofollow">` inside `<head>`, including when revising HTML that did not use the starter. Preserve this on revisions unless the user explicitly requests indexing. This is a crawler instruction, not access control; do not add a blanket robots.txt crawl block that prevents crawlers from reading noindex.
-- Use native HTML and CSS where they suffice. Small inline scripts, explanatory interactions, and purposeful motion are welcome when they improve understanding or the requested visual treatment. Do not add controls merely to make a page seem interactive; keep the core explanation available without scripts.
+- Use native HTML and CSS where they suffice. Small inline scripts, explanatory interactions, and purposeful motion are welcome when they improve understanding or the requested visual treatment. Do not add controls merely to make a page seem interactive; keep the core explanation available without scripts. The UI canvas itself requires JavaScript/WebGL; its generated semantic content outline provides the no-script and print fallback.
 - Use real supplied or verified content. State unknowns and label illustrative numbers. Keep source links close to the relevant claims when research is involved.
 - Match the structure to the content: comparisons can be parallel, changes can be before/after, processes can have a diagram. Well-composed prose is also a valid artifact. Do not invent dashboard metrics, controls, diagrams, or cards to fill space.
 
