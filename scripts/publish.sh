@@ -73,7 +73,7 @@ else
     jq -n --arg source "$input" --arg hash "$digest" --argjson bytes "$bytes" '{source:$source,uploaded_path:"/index.html",bytes:$bytes,sha256:$hash,network_requests:0,provider:"here.now"}'
     exit 0
   fi
-  root=${HTML_ARTIFACT_STATE_DIR:-"$HOME/.codex/artifacts/.here-now"}
+  root=${HTML_ARTIFACT_STATE_DIR:-"$(dirname "$input")/.here-now"}
   mkdir -p "$root"
   work=$(mktemp -d "$root/site-XXXXXXXX")
   receipt="$work/receipt.json"

@@ -8,7 +8,7 @@ controls, without editor headers, layer lists, or property panels.
 The design uses OpenPencil's actual Skia renderer and Yoga
 layout. It is not a screenshot inside a fake editor.
 
-Use the regular HTML starter for prose reports, comparisons, explanations, or a
+Use the general HTML approach for prose reports, comparisons, explanations, or a
 working HTML prototype with live form controls and links. A UI canvas contains
 design layers: a drawn button is not a working application button. User requests
 for full manual editing, Figma file import, collaboration, or production apps
@@ -17,10 +17,11 @@ need a different workflow.
 ## Generate and revise
 
 1. Choose screen sizes, a coherent visual direction, and meaningful layers.
-   Follow the shared design guidance, adapting it to UI rather than report layout.
-2. Read [example.json](../assets/ui-canvas/example.json) as a working schema and
-   composition example. Its reading product and book content are fictional.
-   Replace the content and design for the user's actual subject.
+   Follow [design.md](design.md), applying the visual decisions to the artboards.
+2. Read the scene contract below for the supported structure and fields.
+   Compose the requested screens from their content, relationships, and chosen
+   visual direction. The bundled product demo is a maintenance fixture, not
+   required authoring context.
 3. Write `scene.json` in the artifact's output directory. This is the editable
    source for later agent revisions; retain it beside `index.html`.
 4. Generate with Python 3.9+ and the pinned font-subsetting tools. Reuse a working
@@ -92,53 +93,21 @@ Unknown properties are rejected so a misspelled style cannot silently disappear.
 Every node requires `type`, a nonempty `name`, `width`, and `height`.
 All positions and sizes are design pixels, before viewport zoom.
 
-```json
-{
-  "version": 1,
-  "title": "Account screen",
-  "description": "A compact account screen and its primary action.",
-  "lang": "en",
-  "background": "#e9eaed",
-  "artboards": [
-    {
-      "type": "FRAME",
-      "name": "Mobile · Account",
-      "x": 0, "y": 0, "width": 390, "height": 844,
-      "fill": "#fafaf7", "clipsContent": true,
-      "children": [
-        {
-          "type": "TEXT", "name": "Heading",
-          "x": 24, "y": 40, "width": 342, "height": 48,
-          "text": "Your account", "fontSize": 30,
-          "fontWeight": 700, "fill": "#243b32"
-        },
-        {
-          "type": "FRAME", "name": "Primary action",
-          "x": 24, "y": 120, "width": 342, "height": 48,
-          "fill": "#244b3c", "cornerRadius": 8,
-          "layout": {
-            "direction": "HORIZONTAL", "padding": 12,
-            "justify": "CENTER", "align": "CENTER"
-          },
-          "children": [
-            {
-              "type": "TEXT", "name": "Action label",
-              "width": 318, "height": 24, "text": "Save changes",
-              "fontSize": 14, "fontWeight": 600,
-              "textAlignHorizontal": "CENTER", "fill": "#ffffff"
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
-```
+The top-level object has these fields:
 
-The top level requires `version: 1`, `title`, `description`, `lang`, and
-`artboards`. `background` is optional. Each artboard is a positive-sized `FRAME`;
-its `x`/`y` are world coordinates. Place variants apart explicitly (for example,
-the second frame at the first frame's width plus 80).
+| Field | Contract |
+| --- | --- |
+| `version` | Required; `1`. |
+| `title`, `description` | Required nonempty strings describing the requested design. |
+| `lang` | Required language tag matching the content. |
+| `background` | Optional canvas-surround color in `#RRGGBB` or `#RRGGBBAA`. |
+| `artboards` | Required nonempty array of positive-sized `FRAME` nodes. |
+
+Artboard `x`/`y` values are world coordinates; child coordinates are relative to
+their parent. Choose screen dimensions for the intended device and content.
+Arrange artboards with explicit nonoverlapping bounds so their spatial
+relationship supports the intended comparison or flow. Geometry, text styles,
+and colors are authored decisions, not schema defaults.
 
 | Node fields | Supported values and behavior |
 | --- | --- |
@@ -147,10 +116,10 @@ the second frame at the first frame's width plus 80).
 | `x`, `y` | Optional, default 0. Negative positions allowed. |
 | `width`, `height` | Required. Text boxes need enough height; font size is not box height. |
 | `fill` | `#RRGGBB` or `#RRGGBBAA`. Text defaults to black; other nodes have no fill by default. |
-| `stroke` | `{"color":"#dce2dc","width":1}`. Inside-aligned. Use a stroke for a `LINE`. |
+| `stroke` | Object with required `color` (hex color) and `width` (nonnegative pixels). Inside-aligned. Use a stroke for a `LINE`. |
 | `cornerRadius`, `rotation`, `opacity` | Radius in pixels, rotation in degrees, opacity 0–1. |
 | `clipsContent`, `visible` | Booleans. Explicitly clip screen frames when needed. |
-| `shadow` | `{"color":"#00000020","x":0,"y":8,"blur":24}`; drop shadow. |
+| `shadow` | Drop-shadow object with required `color` (hex color), `x`/`y` offsets (pixels), and nonnegative `blur` (pixels). |
 | `image` | Embedded `data:image/png;base64,...`, JPEG, or WebP; fills the node. No URL fetching. |
 | `text` | Required for `TEXT`. Newlines are allowed. |
 | `fontFamily` | `Inter` (default) or `Noto Sans SC`. Chinese fallback is embedded automatically. |
@@ -165,8 +134,8 @@ the second frame at the first frame's width plus 80).
 | `layoutPositioning` | `AUTO` or `ABSOLUTE` for a child inside an auto-layout frame. |
 
 `image` replaces `fill`. Prefer concise layer names that explain the UI's
-structure. Use frames to express actual groups such as navigation, a form, or
-a card. Do not flatten an entire screen to one raster image.
+structure. Use frames to express groups that belong together in the requested
+interface. Do not flatten an entire screen to one raster image.
 
 ### Auto layout
 
